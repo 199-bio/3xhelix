@@ -5,9 +5,10 @@
     --light-gold-accent: #C4A26E;
     --text-color: #333333;
     --light-text: #F5F5F5;
-    --section-padding: 6rem 3rem;
+    --section-padding: 5rem 2rem;
     --card-padding: 1.5rem;
     --border-radius: 8px;
+    --max-content-width: 1280px;
 }
 
 *,
@@ -30,6 +31,11 @@ body {
     line-height: 1.7;
     overflow-x: hidden; /* Prevent horizontal scroll */
     position: relative; /* For particle container positioning */
+}
+
+main {
+    width: 100%;
+    overflow-x: hidden;
 }
 
 #particle-container {
@@ -77,7 +83,7 @@ h3 {
 
 p {
     margin-bottom: 1.5rem;
-    max-width: 70ch; /* Improve readability */
+    max-width: 100%; /* Let container handle width */
 }
 
 a {
@@ -93,6 +99,30 @@ a:hover, a:focus {
 section {
     padding: var(--section-padding);
     position: relative; /* For potential pseudo-elements or layered effects */
+    width: 100%;
+}
+
+/* Section Container System - Apply consistent width to ALL sections */
+.section-container {
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Apply container constraints to all major sections */
+#challenge-calling > *,
+#helix-unveiled > *,
+#gene-therapies > *,
+#disease-gene-therapies > *,
+#longevity > *,
+#oncology > *,
+#cell-therapies-section > *,
+#architects-innovation > *,
+#sharing-knowledge > *,
+#contact > * {
+    max-width: var(--max-content-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Hero Section */
@@ -103,36 +133,71 @@ section {
     align-items: center;
     justify-content: center;
     padding: 5rem 2rem;
-    background: linear-gradient(135deg, #FAF8F5 0%, rgba(250, 248, 245, 0.8) 50%, #f0ebe5 100%);
     overflow: hidden;
 }
 
-/* Abstract art elements */
+/* Hero Video Background */
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2;
+    object-fit: cover;
+}
+
+/* Hero Overlay - Bright semi-transparent layer with blur */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Multiple overlays for optimal text readability */
+    background: 
+        linear-gradient(135deg, 
+            rgba(250, 248, 245, 0.85) 0%, 
+            rgba(250, 248, 245, 0.75) 40%, 
+            rgba(240, 235, 229, 0.8) 100%),
+        radial-gradient(circle at 50% 50%, 
+            rgba(255, 255, 255, 0.3) 0%, 
+            transparent 70%);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Abstract art elements - now decorative accents */
 .hero::before,
 .hero::after {
     content: '';
     position: absolute;
     border-radius: 50%;
     filter: blur(100px);
-    opacity: 0.4;
-    z-index: 0;
+    opacity: 0.3;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .hero::before {
-    width: 80vw;
-    height: 80vw;
+    width: 40vw;
+    height: 40vw;
     background: radial-gradient(circle at 30% 50%, var(--gold-accent) 0%, transparent 50%);
-    top: -40vw;
-    right: -20vw;
+    top: -20vw;
+    right: -10vw;
     animation: floatSlow 30s ease-in-out infinite;
 }
 
 .hero::after {
-    width: 60vw;
-    height: 60vw;
+    width: 30vw;
+    height: 30vw;
     background: radial-gradient(circle at 70% 30%, var(--dark-greyish-green) 0%, transparent 60%);
-    bottom: -30vw;
-    left: -20vw;
+    bottom: -15vw;
+    left: -10vw;
     animation: floatReverse 25s ease-in-out infinite;
 }
 
@@ -151,8 +216,19 @@ section {
 .hero-content {
     text-align: center;
     z-index: 10;
-    max-width: 1200px;
+    max-width: var(--max-content-width);
     position: relative;
+    /* Subtle backdrop for text area */
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    padding: 3rem;
+    border-radius: 40px;
+}
+
+.hero h1 {
+    /* Enhanced text shadow for better readability on video */
+    text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .hero h1::after {
@@ -163,7 +239,7 @@ section {
     z-index: -1;
     background: none;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 80px rgba(196, 162, 110, 0.3);
+    text-shadow: 0 0 80px rgba(196, 162, 110, 0.5);
 }
 
 .tagline {
@@ -173,6 +249,9 @@ section {
     font-weight: 300;
     letter-spacing: 0.1em;
     opacity: 0.9;
+    text-shadow: 
+        0 1px 2px rgba(255, 255, 255, 0.8),
+        0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .sub-tagline {
@@ -181,6 +260,9 @@ section {
     font-weight: 400;
     letter-spacing: 0.05em;
     margin-bottom: 3rem;
+    text-shadow: 
+        0 1px 2px rgba(255, 255, 255, 0.8),
+        0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* Large abstract shapes for sections */
@@ -246,14 +328,16 @@ h2 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: 2rem;
     position: relative;
-    display: inline-block;
+    display: block;
+    text-align: center;
 }
 
 h2::after {
     content: '';
     position: absolute;
     bottom: -10px;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 60px;
     height: 4px;
     background: var(--gold-accent);
@@ -348,7 +432,7 @@ footer .powered-by {
 #challenge-calling p {
     font-size: 1.1rem;
     color: var(--text-color);
-    max-width: 80ch;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -368,11 +452,12 @@ footer .powered-by {
 
 .platform-pillars {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 2rem;
     margin-bottom: 4rem;
+    width: 100%;
 }
 
 .pillar {
@@ -423,9 +508,10 @@ footer .powered-by {
 
 .divisions {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 2rem;
+    width: 100%;
 }
 
 .division-card {
@@ -461,12 +547,12 @@ footer .powered-by {
 }
 
 .service-area {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     padding: 2rem;
     border-radius: var(--border-radius);
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(var(--gold-accent-rgb,176,141,87),0.1);
-    /* Light glassmorphic touch or subtle card style */
+    width: 100%;
 }
 
 .service-area:last-child {
@@ -478,9 +564,21 @@ footer .powered-by {
     color: var(--dark-greyish-green);
     margin-bottom: 1.5rem;
     text-align: center;
-    border-bottom: 2px solid var(--gold-accent);
-    padding-bottom: 0.5rem;
-    display: inline-block; /* To make border only as wide as text */
+    position: relative;
+    padding-bottom: 1rem;
+    display: block;
+}
+
+.service-area h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--gold-accent);
+    border-radius: 2px;
 }
 
 .service-area > p { /* Direct paragraph child for the intro */
@@ -579,7 +677,7 @@ footer .powered-by {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 3rem;
-    max-width: 1600px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -767,6 +865,26 @@ footer .powered-by {
     margin-bottom: 1rem;
 }
 
+.knowledge-image-container {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.knowledge-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.knowledge-item-card:hover .knowledge-image {
+    transform: scale(1.05);
+}
+
 .video-thumbnail-container {
     position: relative;
     width: 100%;
@@ -837,21 +955,18 @@ footer .powered-by {
     text-align: center;
     color: var(--text-color);
     margin-bottom: 2rem;
-    max-width: 60ch;
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
 }
 
 #contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem auto;
     max-width: 600px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: rgba(250, 248, 245, 0.7); /* Creamy glass */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: var(--border-radius);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-    border: 1px solid rgba(196, 162, 110, 0.3);
+    width: 100%;
 }
 
 #contact-form input[type="email"],
@@ -914,13 +1029,15 @@ footer .powered-by {
 }
 
 .cookie-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2rem;
+    border-radius: 20px;
     text-align: center;
-    gap: 1rem;
+    max-width: var(--max-content-width);
+    width: 90%;
+    margin: 0 auto;
 }
 
 .cookie-content h4 {
@@ -934,7 +1051,7 @@ footer .powered-by {
     color: var(--cream-bg);
     font-size: 0.9rem;
     margin: 0;
-    max-width: 600px;
+    max-width: 100%;
     opacity: 0.9;
 }
 
@@ -996,21 +1113,22 @@ main section.visible {
 }
 
 .section-subtitle {
-    font-size: 1.2rem;
-    color: #666;
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    max-width: 600px;
-    margin: 0 auto;
+    font-size: 1.1rem;
+    color: var(--dark-greyish-green);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Grid Layouts - Larger, Bolder */
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 3rem;
-    max-width: 1600px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 100%;
+    margin: 3rem 0;
 }
 
 .feature-card {
@@ -1082,10 +1200,10 @@ main section.visible {
 /* Knowledge Grid - Magazine Style */
 .knowledge-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
-    max-width: 1600px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 100%;
+    margin: 3rem 0;
 }
 
 .knowledge-category {
@@ -1148,12 +1266,11 @@ main section.visible {
 }
 
 .contact-form {
-    max-width: 900px;
+    max-width: 600px;
     margin: 0 auto;
+    padding: 3rem 2rem;
     background: rgba(255, 255, 255, 0.9);
-    padding: 4rem;
-    border-radius: 30px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
 }
 
 .form-row {
@@ -1267,7 +1384,7 @@ button[type="submit"]:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    margin-bottom: 4rem;
+    margin: 2rem 0;
 }
 
 .analysis-category-card {
@@ -1357,7 +1474,7 @@ button[type="submit"]:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    margin-bottom: 3rem;
+    margin: 2rem 0;
 }
 
 .disease-category-card {
@@ -1462,7 +1579,7 @@ button[type="submit"]:hover {
 /* Longevity Grid */
 .longevity-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1.5rem;
 }
 
@@ -1498,9 +1615,9 @@ button[type="submit"]:hover {
 /* Oncology Services */
 .oncology-services {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
-    margin-bottom: 3rem;
+    margin: 2rem 0;
 }
 
 .service-card {
@@ -1567,9 +1684,9 @@ button[type="submit"]:hover {
 /* Regenerative Categories */
 .regenerative-categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
-    margin-top: 2rem;
+    margin: 2rem 0;
 }
 
 .regenerative-card {
@@ -1608,9 +1725,9 @@ button[type="submit"]:hover {
 /* Cellular Sources Grid */
 .cellular-sources-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
-    margin-top: 2rem;
+    margin: 2rem 0;
 }
 
 .source-card {

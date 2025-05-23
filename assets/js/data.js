@@ -191,13 +191,22 @@ Through his clinical practice, research, and educational efforts, Dr. Oscar Guad
             fullBio: `With over a decade of experience at the intersection of patient safety, healthcare logistics, and health technology, Hashim brings a deep operational expertise to their role as Chief Operating Officer at Trippplehelix. Having worked across both National and private healthcare sectors, they have led initiatives that enhanced patient safety protocols and optimized care delivery. Their career spans managing the distribution of medicines and medical devices, ensuring regulatory compliance and supply chain efficiency across diverse markets.
 
 Prior to joining Trippplehelix, Hashim held senior roles in health-tech ventures focused on making healthcare more affordable and accessible. Their commitment to safety, innovation and excellence in healthcare operations positions them as a key driver of Trippplehelix's mission and growth.`
+        },
+        {
+            name: 'Dr Oliver Zolman MD',
+            title: 'Director Longevity Science',
+            fullBio: `Dr Oliver Zolman MBBS BSc is a leading longevity doctor and scientist specialising in evidence-based health optimisation and rejuvenation medicine. A graduate of King's College London, he holds a First Class Honours degree in Regenerative Medicine and completed a Visiting Fellowship in Evidence-Based Medicine at the University of Sydney.
+
+Oliver is at the forefront of ageing research, aiming to reverse biological aging across all 81 organ types and achieve longevity escape velocity (LEV) by 2030. As the founder of 20one Consulting and a creator of Project Blueprint with entrepreneur Bryan Johnson, Dr Zolman applies cutting-edge science to create personalised, results-driven health and longevity strategies.
+
+His work has been featured in the BBC, Bloomberg, The Times, Guardian, New York Post, Piers Morgan, GQ, Rolling Stone, The Onion, and the 2025 Netflix Documentary "Don't Die".`
         }
     ],
     knowledgeItems: [
-        { type: 'book', title: 'Gene Therapy Essentials', description: 'Design of AAV for gene therapy provides an overview of gene therapy technology in 2025. Available on Amazon.com', link: '#' }, // Replace # with actual Amazon link
-        { type: 'book', title: 'Stronger, faster, smarter.....', description: 'Today what can trippplehelix science accomplish? Available on Amazon.com', link: '#' }, // Replace # with actual Amazon link
-        { type: 'event', title: 'Dublin Longevity Summit', description: 'Come see Dr Patrick E Sewell MD lecture on the latest on gene therapy and longevity medicine in Dublin Ireland July 2-4, 2025.' },
-        { type: 'event', title: 'Cannes France Longevity Conference', description: 'Come see Dr Patrick E. Sewell MD lecture on the latest on gene therapy and longevity medicine in Cannes France June 25 - 26, 2025.' },
+        { type: 'book', title: 'Gene Therapy Essentials', description: 'Design of AAV for gene therapy provides an overview of gene therapy technology in 2025. Available on Amazon.com', link: 'https://amzn.asia/d/dJtG7PR', imageUrl: 'assets/images/gene-therapy-essentials.png' },
+        { type: 'book', title: 'Stronger, faster, smarter.....', description: 'Today what can trippplehelix science accomplish? Available on Amazon.com', link: 'https://amzn.asia/d/dJtG7PR', imageUrl: 'assets/images/stronger-faster-smarter.png' },
+        { type: 'event', title: 'Dublin Longevity Summit', description: 'Come see Dr Patrick E Sewell MD lecture on the latest on gene therapy and longevity medicine in Dublin Ireland July 2-4, 2025.', imageUrl: 'assets/images/dublin-longevity-summit.png' },
+        { type: 'event', title: 'Cannes France Longevity Conference', description: 'Come see Dr Patrick E. Sewell MD lecture on the latest on gene therapy and longevity medicine in Cannes France June 25 - 26, 2025.', imageUrl: 'assets/images/cannes-longevity-conference.jpg' },
         { type: 'video', title: 'The Gene Therapy Revolution', description: 'See Dr Patrick E. Sewell MD lecture at at Oxford University, United Kingdom', videoId: '0zWgyg28VLE', thumbnailUrl: 'assets/images/gene_therapy_revolution.jpg' },
         { type: 'video', title: 'Comprehensive Cancer Therapy', description: 'See Dr Patrick E. Sewell MD lecture on the latest in Cancer therapy', videoId: 'VNWV5BRQs6A', thumbnailUrl: 'assets/images/comprehensive_cancer_therapy.jpg' },
         { type: 'video', title: 'Dementia Gene Therapy', description: 'See Dr Patrick E. Sewell MD discuss Dementia Gene Therapy', videoId: 'i_FoZyxgLC0', thumbnailUrl: 'assets/images/dementia_gene_therapy.jpg' },

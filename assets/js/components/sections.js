@@ -329,7 +329,14 @@ function renderKnowledgeSection() {
     siteContent.knowledgeItems.forEach(item => {
         const knowledgeCard = document.createElement('div');
         knowledgeCard.classList.add('knowledge-item-card', 'glass-card');
-        let content = `<h3>${item.title}</h3><p>${item.description}</p>`;
+        let content = '';
+        
+        // Add image for books and events
+        if (item.imageUrl && (item.type === 'book' || item.type === 'event')) {
+            content += `<div class="knowledge-image-container"><img src="${item.imageUrl}" alt="${item.title}" class="knowledge-image"></div>`;
+        }
+        
+        content += `<h3>${item.title}</h3><p>${item.description}</p>`;
         
         if (item.type === 'video') {
             content += `<div class="video-thumbnail-container"><img src="${item.thumbnailUrl}" alt="${item.title}" class="video-thumbnail"><div class="play-button-overlay">▶</div></div>`;
