@@ -186,6 +186,59 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- JavaScript Files - Modular Architecture -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/components/team.js"></script>
+    <script src="assets/js/components/sections.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <!-- Global functions for onclick handlers -->
+    <script>
+        // Make toggle functions globally available
+        window.toggleBio = function(index) {
+            const bioContainer = document.getElementById(`bio-${index}`);
+            const button = event.target;
+            
+            if (bioContainer && bioContainer.style.display === 'none') {
+                bioContainer.style.display = 'block';
+                button.textContent = 'Close Bio';
+                setTimeout(() => {
+                    bioContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            } else if (bioContainer) {
+                bioContainer.style.display = 'none';
+                button.textContent = 'Read Full Bio';
+            }
+        }
+
+        window.toggleAllDiseases = function() {
+            const container = document.getElementById('all-diseases-container');
+            const button = event.target;
+            if (container) {
+                if (container.style.display === 'none') {
+                    container.style.display = 'grid';
+                    button.textContent = 'Show Less';
+                } else {
+                    container.style.display = 'none';
+                    button.textContent = `View All ${siteContent.diseaseGeneTherapies.list.length}+ Conditions We Treat`;
+                }
+            }
+        }
+
+        window.toggleAllCancers = function() {
+            const container = document.getElementById('all-cancers');
+            const button = event.target;
+            if (container) {
+                if (container.style.display === 'none') {
+                    container.style.display = 'grid';
+                    button.textContent = 'Show Less';
+                } else {
+                    container.style.display = 'none';
+                    button.textContent = 'View All Cancer Types';
+                }
+            }
+        }
+    </script>
 </body>
 </html> 
