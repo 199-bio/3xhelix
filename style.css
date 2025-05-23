@@ -5,9 +5,10 @@
     --light-gold-accent: #C4A26E;
     --text-color: #333333;
     --light-text: #F5F5F5;
-    --section-padding: 5rem 2rem;
-    --card-padding: 1.5rem;
-    --border-radius: 8px;
+    --dark-bg: #1a1f1c;
+    --section-padding: 7rem 2rem;
+    --card-padding: 2rem;
+    --border-radius: 20px;
     --max-content-width: 1280px;
 }
 
@@ -283,39 +284,21 @@ section.alt-bg::before {
     pointer-events: none;
 }
 
-/* Modern cards with bold shadows */
+/* Modern cards - cleaner, more minimal */
 .glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(30px) saturate(150%);
-    -webkit-backdrop-filter: blur(30px) saturate(150%);
-    border-radius: 30px;
-    padding: 3rem;
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.5) inset,
-        0 0 100px rgba(196, 162, 110, 0.1) inset;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-}
-
-.glass-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-    opacity: 0.6;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .glass-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 
-        0 30px 80px rgba(0, 0, 0, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.7) inset,
-        0 0 120px rgba(196, 162, 110, 0.15) inset;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
 }
 
 /* Typography improvements */
@@ -325,11 +308,13 @@ h1, h2, h3 {
 }
 
 h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 2rem;
+    font-size: clamp(3rem, 6vw, 5rem);
+    margin-bottom: 3rem;
     position: relative;
     display: block;
     text-align: center;
+    font-weight: 900;
+    letter-spacing: -0.02em;
 }
 
 h2::after {
@@ -418,9 +403,67 @@ footer .powered-by {
     }
 }
 
+/* Dark sections for contrast */
+.dark-section {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    position: relative;
+}
+
+.dark-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(176, 141, 87, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.dark-section h2,
+.dark-section h3 {
+    color: var(--light-text);
+}
+
+.dark-section p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.dark-section .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-section .service-area {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-section .details-container {
+    background: transparent;
+}
+
+/* Huge stat displays */
+.stat-display {
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 900;
+    color: var(--gold-accent);
+    line-height: 1;
+    margin: 0.5rem 0;
+}
+
+.stat-label {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
 /* Challenge & Calling Section */
 #challenge-calling {
-    background-color: var(--cream-bg); /* Light cream, or slightly off-white */
+    background-color: var(--cream-bg);
     text-align: center;
 }
 
@@ -430,115 +473,155 @@ footer .powered-by {
 }
 
 #challenge-calling p {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: var(--text-color);
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.8;
 }
 
 /* Helix Unveiled Section */
 #helix-unveiled {
-    background-color: #f0ebe5; /* Slightly different cream or light beige */
+    position: relative;
 }
 
 #helix-unveiled .platform-intro p,
 #helix-unveiled .divisions-intro p {
     text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: var(--dark-greyish-green);
+    font-size: 1.4rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
 }
 
 .platform-pillars {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
     flex-wrap: wrap;
     gap: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 6rem;
     width: 100%;
 }
 
 .pillar {
-    flex-basis: calc(25% - 2rem); /* 4 pillars, adjust for gap */
-    min-width: 200px;
-    text-align: center;
-    padding: var(--card-padding);
+    flex-basis: calc(25% - 2rem);
+    min-width: 240px;
+    text-align: left;
+    padding: 3rem 2rem;
     border-radius: var(--border-radius);
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(var(--gold-accent-rgb, 176, 141, 87), 0.2);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .pillar:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--gold-accent);
 }
 
-.pillar .pillar-icon {
-    font-size: 2.5rem;
+.pillar-number {
+    font-size: 4rem;
+    font-weight: 900;
     color: var(--gold-accent);
+    opacity: 0.2;
+    line-height: 1;
     margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 80px;
-}
-
-.pillar .pillar-icon svg {
-    width: 60px;
-    height: 60px;
-    stroke: var(--gold-accent);
-    transition: all 0.3s ease;
-}
-
-.pillar:hover .pillar-icon svg {
-    stroke: var(--light-gold-accent);
-    transform: scale(1.1);
 }
 
 .pillar h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.pillar-progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gold-accent);
+    transition: width 1s ease;
+}
+
+/* Platform Stats */
+.platform-stats,
+.analysis-stats {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    text-align: center;
+    min-width: 200px;
 }
 
 .divisions {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 2.5rem;
     width: 100%;
 }
 
 .division-card {
-    flex-basis: calc(33.333% - 2rem); /* 3 cards */
-    min-width: 280px;
-    padding: var(--card-padding);
+    flex-basis: calc(33.333% - 2.5rem);
+    min-width: 300px;
+    padding: 3rem;
     border-radius: var(--border-radius);
-    background-color: var(--cream-bg);
-    border: 1px solid var(--light-gold-accent);
-    box-shadow: 0 5px 20px rgba(74, 93, 82, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.division-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gold-accent);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
 }
 
 .division-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(74, 93, 82, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--gold-accent);
+}
+
+.division-card:hover::before {
+    transform: translateX(0);
 }
 
 .division-card h3 {
-    color: var(--dark-greyish-green);
-    font-size: 1.6rem;
-    margin-bottom: 0.8rem;
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
 }
 
 .division-card p {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Transforming Lives Section */
@@ -1389,29 +1472,32 @@ button[type="submit"]:hover {
 
 .analysis-category-card {
     padding: 2.5rem;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius);
+    background: white;
     position: relative;
     transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: 100%;
 }
 
 .analysis-category-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-color: var(--gold-accent);
 }
 
 .category-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
     display: block;
-    filter: grayscale(20%);
+    opacity: 0.8;
 }
 
 .analysis-category-card h4 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: var(--dark-greyish-green);
-    margin-bottom: 1rem;
-    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
 }
 
 .category-items {
@@ -1478,32 +1564,44 @@ button[type="submit"]:hover {
 }
 
 .disease-category-card {
-    padding: 2rem;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    border: 2px solid transparent;
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.disease-category-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
     transition: all 0.3s ease;
 }
 
-.disease-category-card.neurological {
-    border-color: rgba(147, 51, 234, 0.2);
+.disease-category-card.neurological::after {
+    background: #9333EA;
 }
 
-.disease-category-card.cardiovascular {
-    border-color: rgba(236, 72, 153, 0.2);
+.disease-category-card.cardiovascular::after {
+    background: #EC4899;
 }
 
-.disease-category-card.metabolic {
-    border-color: rgba(251, 146, 60, 0.2);
+.disease-category-card.metabolic::after {
+    background: #FB923C;
 }
 
-.disease-category-card.genetic {
-    border-color: rgba(34, 197, 94, 0.2);
+.disease-category-card.genetic::after {
+    background: #22C55E;
 }
 
 .disease-category-card:hover {
-    border-color: var(--gold-accent);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-3px);
 }
 
 .category-header {
@@ -1515,7 +1613,12 @@ button[type="submit"]:hover {
 
 .category-header h4 {
     margin: 0;
-    color: var(--dark-greyish-green);
+    font-size: 1.6rem;
+    color: white;
+}
+
+.category-icon {
+    font-size: 2.5rem;
 }
 
 .featured-diseases {
@@ -1526,11 +1629,16 @@ button[type="submit"]:hover {
 
 .disease-tag {
     display: inline-block;
-    padding: 0.4rem 0.8rem;
-    background: rgba(196, 162, 110, 0.1);
-    border-radius: 16px;
-    font-size: 0.85rem;
-    color: var(--dark-greyish-green);
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.2s ease;
+}
+
+.disease-tag:hover {
+    background: rgba(255, 255, 255, 0.15);
 }
 
 /* View All Section */
