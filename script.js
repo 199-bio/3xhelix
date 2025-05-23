@@ -182,20 +182,7 @@ One of his notable achievements includes his contribution to the development of 
 
 Dr. Guadarrama frequently shares his knowledge as a speaker on topics related to Prolotherapy, the clinical application of platelet-rich growth factors, Regenerative Medicine, and Cell Therapy in dogs and cats. His presentations have helped educate fellow veterinarians about these cutting-edge treatments and their benefits for animal patients.
 
-Through his clinical practice, research, and educational efforts, Dr. Oscar Guadarrama continues to advance the field of veterinary medicine, particularly in regenerative therapies that improve the quality of life for companion animals.`,
-            fullBioSpanish: `El Dr. Oscar Guadarrama es un distinguido veterinario que ha dedicado su carrera al avance de la medicina y cirugía de pequeños animales. Como Director General de Intermédica Veterinaria, se ha consolidado como un líder en el campo veterinario.
-
-Actualmente, el Dr. Guadarrama ocupa el cargo de Director de Investigación y Terapia Veterinaria en Trippplehelix, donde lidera iniciativas innovadoras de investigación y desarrollos terapéuticos.
-
-Es particularmente reconocido por su trabajo pionero en medicina regenerativa veterinaria. El Dr. Guadarrama se desempeña como Director Médico de MEREVET Medicina Regenerativa Veterinaria, donde ha desarrollado protocolos innovadores para la aplicación de Factores de Crecimiento y Células Madre en tratamientos veterinarios.
-
-Su experiencia en terapias regenerativas es ampliamente reconocida, lo que lo convierte en miembro activo de la Sociedad Latinoamericana de Células Madre (SOLCEMA) y miembro fundador de la Sociedad Internacional de Medicina Regenerativa. El Dr. Guadarrama también ha contribuido significativamente al campo como miembro de la Asociación de Profesionales del Ozono A.C.
-
-Uno de sus logros notables incluye su contribución al desarrollo de la versión veterinaria de la Declaración de Madrid, un documento importante en el campo de la medicina veterinaria.
-
-El Dr. Guadarrama comparte frecuentemente su conocimiento como ponente en temas relacionados con Proloterapia, la aplicación clínica de factores de crecimiento ricos en plaquetas, Medicina Regenerativa y Terapia Celular en perros y gatos. Sus presentaciones han ayudado a educar a otros veterinarios sobre estos tratamientos de vanguardia y sus beneficios para los pacientes animales.
-
-A través de su práctica clínica, investigación y esfuerzos educativos, el Dr. Oscar Guadarrama continúa avanzando en el campo de la medicina veterinaria, particularmente en terapias regenerativas que mejoran la calidad de vida de los animales de compañía.`
+Through his clinical practice, research, and educational efforts, Dr. Oscar Guadarrama continues to advance the field of veterinary medicine, particularly in regenerative therapies that improve the quality of life for companion animals.`
         },
         { 
             name: 'Hashim Riaz', 
@@ -315,21 +302,24 @@ function loadDynamicContent() {
     const teamGrid = document.querySelector('#architects-innovation .team-grid');
     if (teamGrid) {
         teamGrid.innerHTML = ''; // Clear placeholder
-        siteContent.teamMembers.forEach(member => {
+        siteContent.teamMembers.forEach((member, index) => {
             const memberCard = document.createElement('div');
             memberCard.classList.add('team-member-card', 'glass-card');
-            let bioContent = `<p class="bio-full">${member.fullBio}</p>`;
             
-            // Add Spanish bio for Dr. Guadarrama
-            if (member.fullBioSpanish) {
-                bioContent += `<hr class="bio-separator"><p class="bio-full bio-spanish">${member.fullBioSpanish}</p>`;
-            }
+            // Create brief excerpt from bio
+            const briefBio = member.fullBio.substring(0, 150) + '...';
             
             memberCard.innerHTML = `
-                <div class="team-member-photo">[PHOTO]</div>
+                <div class="team-member-photo">
+                    <img src="assets/images/team-member-${index + 1}.jpg" alt="${member.name}" onerror="this.style.display='none'; this.parentElement.classList.add('no-photo')">
+                </div>
                 <h3>${member.name}</h3>
                 <p class="title">${member.title}</p>
-                ${bioContent}
+                <p class="bio-excerpt">${briefBio}</p>
+                <button class="read-bio-btn" onclick="toggleBio(${index})">Read Full Bio</button>
+                <div class="bio-full-container" id="bio-${index}" style="display: none;">
+                    <p class="bio-full">${member.fullBio}</p>
+                </div>
             `;
             teamGrid.appendChild(memberCard);
         });
@@ -532,4 +522,22 @@ function initCookieConsent() {
             cookieBanner.style.display = 'none';
         }, 300);
     });
+}
+
+// Toggle bio visibility
+function toggleBio(index) {
+    const bioContainer = document.getElementById(`bio-${index}`);
+    const button = event.target;
+    
+    if (bioContainer.style.display === 'none') {
+        bioContainer.style.display = 'block';
+        button.textContent = 'Close Bio';
+        // Smooth scroll to make sure bio is visible
+        setTimeout(() => {
+            bioContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    } else {
+        bioContainer.style.display = 'none';
+        button.textContent = 'Read Full Bio';
+    }
 } 
