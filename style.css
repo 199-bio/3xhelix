@@ -5,7 +5,7 @@
     --light-gold-accent: #C4A26E;
     --text-color: #333333;
     --light-text: #F5F5F5;
-    --section-padding: 6rem 2rem;
+    --section-padding: 6rem 3rem;
     --card-padding: 1.5rem;
     --border-radius: 8px;
 }
@@ -50,8 +50,18 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: 3.5rem; /* Responsive adjustments later */
-    font-weight: 700;
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.2em;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--dark-greyish-green) 0%, var(--gold-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    position: relative;
 }
 
 h2 {
@@ -141,21 +151,7 @@ section {
 .hero-content {
     text-align: center;
     z-index: 10;
-    max-width: 1000px;
-    position: relative;
-}
-
-.hero h1 {
-    font-size: clamp(4rem, 10vw, 8rem);
-    line-height: 0.9;
-    margin-bottom: 1.5rem;
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    background: linear-gradient(135deg, var(--dark-greyish-green) 0%, var(--gold-accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+    max-width: 1200px;
     position: relative;
 }
 
@@ -583,7 +579,7 @@ footer .powered-by {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 3rem;
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
 }
 
@@ -1013,7 +1009,7 @@ main section.visible {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 3rem;
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
 }
 
@@ -1088,7 +1084,7 @@ main section.visible {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 3rem;
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
 }
 
@@ -1152,7 +1148,7 @@ main section.visible {
 }
 
 .contact-form {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.9);
     padding: 4rem;

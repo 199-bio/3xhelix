@@ -222,26 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function populateList(containerElement, items, listTitle, introText) {
-    if (!containerElement) return;
-
-    let htmlContent = '';
-    if (listTitle) {
-        htmlContent += `<h4>${listTitle}</h4>`;
-    }
-    if (introText) {
-        htmlContent += `<p class="list-intro">${introText}</p>`;
-    }
-    if (items && items.length > 0) {
-        htmlContent += '<ul>';
-        items.forEach(item => {
-            htmlContent += `<li>${item}</li>`;
-        });
-        htmlContent += '</ul>';
-    }
-    containerElement.innerHTML = htmlContent;
-}
-
 function loadDynamicContent() {
     console.log('Loading dynamic content...');
 
