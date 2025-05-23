@@ -245,58 +245,321 @@ function populateList(containerElement, items, listTitle, introText) {
 function loadDynamicContent() {
     console.log('Loading dynamic content...');
 
-    // Populate #gene-therapies > #analysis-power
+    // Populate #gene-therapies > #analysis-power with categorized cards
     const analysisPowerContainer = document.querySelector('#analysis-power .details-container[data-source="gene-therapy-analysis"]');
     if (analysisPowerContainer) {
-        populateList(analysisPowerContainer, siteContent.geneTherapyAnalysis.list, null, null); // Title and intro are already in HTML
-        // Add Complete Body Systems Analysis as a sub-list
-        const bodySystemsContainer = document.createElement('div');
-        bodySystemsContainer.classList.add('details-subsection');
-        analysisPowerContainer.appendChild(bodySystemsContainer);
-        populateList(bodySystemsContainer, siteContent.completeBodySystemsAnalysis.list, siteContent.completeBodySystemsAnalysis.title);
+        // Group analysis items into categories
+        const analysisCategories = [
+            {
+                title: 'Aging & Longevity',
+                icon: '⏰',
+                items: [
+                    'Epigenetic Biological Age',
+                    'Telomere Length Analysis',
+                    'Dunedin PACE',
+                    'OMICm Age (Harvard)',
+                    'Extrinsic & Intrinsic Age'
+                ]
+            },
+            {
+                title: 'Disease Screening',
+                icon: '🔬',
+                items: [
+                    'Rare Disease Screening (15,000+)',
+                    'Cancer Risk Analysis',
+                    'Autoimmune Disorders',
+                    'Carrier Screening'
+                ]
+            },
+            {
+                title: 'Body Systems',
+                icon: '🫀',
+                items: [
+                    'Cardiovascular Health',
+                    'Brain & Neurological',
+                    'Digestive & Gut Health',
+                    'Immune System Analysis'
+                ]
+            },
+            {
+                title: 'Genomic Analysis',
+                icon: '🧬',
+                items: [
+                    '850,000+ CpG Loci',
+                    'Whole Genomic Sequencing',
+                    'Whole Exon Sequencing',
+                    'Medication Response'
+                ]
+            }
+        ];
+
+        let htmlContent = '<div class="analysis-categories">';
+        analysisCategories.forEach(category => {
+            htmlContent += `
+                <div class="analysis-category-card glass-card">
+                    <div class="category-icon">${category.icon}</div>
+                    <h4>${category.title}</h4>
+                    <ul class="category-items">
+                        ${category.items.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        });
+        htmlContent += '</div>';
+        
+        // Add the complete body systems as a separate visual grid
+        htmlContent += '<div class="body-systems-grid">';
+        htmlContent += '<h4 class="section-subtitle">Complete Body Systems Analysis</h4>';
+        htmlContent += '<div class="systems-icons">';
+        
+        const bodySystems = [
+            { name: 'Cardiovascular', icon: '❤️' },
+            { name: 'Digestive', icon: '🫁' },
+            { name: 'Integumentary', icon: '🧴' },
+            { name: 'Endocrine', icon: '⚗️' },
+            { name: 'Immune', icon: '🛡️' },
+            { name: 'Lymphatic', icon: '💧' },
+            { name: 'Musculoskeletal', icon: '💪' },
+            { name: 'Neurological', icon: '🧠' },
+            { name: 'Respiratory', icon: '🫁' },
+            { name: 'Reproductive', icon: '🔄' },
+            { name: 'Sensory', icon: '👁️' },
+            { name: 'Urinary', icon: '💧' }
+        ];
+        
+        bodySystems.forEach(system => {
+            htmlContent += `
+                <div class="system-icon-card">
+                    <div class="system-icon">${system.icon}</div>
+                    <p>${system.name}</p>
+                </div>
+            `;
+        });
+        
+        htmlContent += '</div></div>';
+        analysisPowerContainer.innerHTML = htmlContent;
     }
 
-    // Populate #disease-gene-therapies
+    // Populate #disease-gene-therapies with visual categories
     const diseaseTherapiesContainer = document.querySelector('#disease-gene-therapies .details-container[data-source="disease-gene-therapies"]');
-    populateList(diseaseTherapiesContainer, siteContent.diseaseGeneTherapies.list, siteContent.diseaseGeneTherapies.title);
+    if (diseaseTherapiesContainer) {
+        const diseaseCategories = [
+            {
+                title: 'Neurological',
+                icon: '🧠',
+                featured: ['ALS', 'Alzheimers Disease', 'Parkinsons Disease', 'Multiple Sclerosis'],
+                color: 'neurological'
+            },
+            {
+                title: 'Cardiovascular',
+                icon: '❤️',
+                featured: ['Coronary Artery Disease', 'Cardiomyopathy', 'CHF', 'Hypertension'],
+                color: 'cardiovascular'
+            },
+            {
+                title: 'Metabolic',
+                icon: '⚡',
+                featured: ['Type II Diabetes', 'Obesity', 'NAFLD', 'Metabolic Syndrome'],
+                color: 'metabolic'
+            },
+            {
+                title: 'Genetic & Rare',
+                icon: '🧬',
+                featured: ['Duchennes Muscular Dystrophy', 'Pompe Disease', 'Stargardt Disease'],
+                color: 'genetic'
+            }
+        ];
+        
+        let htmlContent = '<div class="disease-categories">';
+        diseaseCategories.forEach(category => {
+            htmlContent += `
+                <div class="disease-category-card ${category.color}">
+                    <div class="category-header">
+                        <span class="category-icon">${category.icon}</span>
+                        <h4>${category.title}</h4>
+                    </div>
+                    <div class="featured-diseases">
+                        ${category.featured.map(disease => `<span class="disease-tag">${disease}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        });
+        htmlContent += '</div>';
+        
+        // Add a "View All" section with the complete list in a modal or expandable
+        htmlContent += `
+            <div class="view-all-section">
+                <button class="view-all-btn" onclick="toggleAllDiseases()">
+                    View All ${siteContent.diseaseGeneTherapies.list.length}+ Conditions We Treat
+                </button>
+                <div id="all-diseases-container" class="all-diseases-grid" style="display: none;">
+                    ${siteContent.diseaseGeneTherapies.list.map(disease => 
+                        `<span class="disease-pill">${disease}</span>`
+                    ).join('')}
+                </div>
+            </div>
+        `;
+        
+        diseaseTherapiesContainer.innerHTML = htmlContent;
+    }
 
-    // Populate #longevity
+    // Populate #longevity with visual cards
     const longevityTherapiesContainer = document.querySelector('#longevity .details-container[data-source="longevity-gene-therapies"]');
-    populateList(longevityTherapiesContainer, siteContent.longevityGeneTherapies.list, siteContent.longevityGeneTherapies.title);
+    if (longevityTherapiesContainer) {
+        let htmlContent = '<div class="longevity-grid">';
+        const longevityTherapies = [
+            { name: 'hTERT', description: 'Telomerase activation', icon: '🧬' },
+            { name: 'Follistatin', description: 'Muscle & metabolism', icon: '💪' },
+            { name: 'FGF21', description: 'Metabolic regulator', icon: '⚡' },
+            { name: 'Klotho Alpha', description: 'Anti-aging protein', icon: '⏰' },
+            { name: 'SIRT1', description: 'Longevity pathway', icon: '🔄' },
+            { name: 'PGC1A', description: 'Mitochondrial health', icon: '🔋' },
+            { name: 'FOXO3', description: 'Stress resistance', icon: '🛡️' },
+            { name: 'VEGF', description: 'Vascular health', icon: '❤️' }
+        ];
+        
+        longevityTherapies.forEach(therapy => {
+            htmlContent += `
+                <div class="longevity-card glass-card">
+                    <div class="therapy-icon">${therapy.icon}</div>
+                    <h4>${therapy.name}</h4>
+                    <p>${therapy.description}</p>
+                </div>
+            `;
+        });
+        htmlContent += '</div>';
+        longevityTherapiesContainer.innerHTML = htmlContent;
+    }
 
-    // Populate #oncology
+    // Populate #oncology with cleaner layout
     const oncologyAnalysisContainer = document.querySelector('#oncology-reimagined .details-container[data-source="oncology-analysis"]');
     if (oncologyAnalysisContainer) {
-        // First add "Our Cancer diagnostics include:" intro
-        const diagnosticsIntro = document.createElement('p');
-        diagnosticsIntro.innerHTML = '<strong>Our Cancer diagnostics include:</strong>';
-        oncologyAnalysisContainer.appendChild(diagnosticsIntro);
+        const oncologyServices = {
+            diagnostics: {
+                title: 'Advanced Diagnostics',
+                icon: '🔬',
+                items: ['CT', 'MRI', 'PET', 'Mammography', 'NGS', 'Tumor DNA Analysis']
+            },
+            therapies: {
+                title: 'Precision Therapies',
+                icon: '🎯',
+                items: ['Microwave Ablation', 'Cryoablation', 'Immunotherapy', 'Gene Therapy']
+            }
+        };
         
-        populateList(oncologyAnalysisContainer, siteContent.oncologicAnalysisDiagnostics.list, null);
-        
-        const genomicContainer = document.createElement('div');
-        genomicContainer.classList.add('details-subsection');
-        oncologyAnalysisContainer.appendChild(genomicContainer);
-        populateList(genomicContainer, siteContent.oncologicAnalysisGenomic.list, siteContent.oncologicAnalysisGenomic.title);
-        
-        // Add "Our cancer Therapies include the following:" intro
-        const therapiesIntro = document.createElement('p');
-        therapiesIntro.innerHTML = '<strong>Our cancer Therapies include the following:</strong>';
-        oncologyAnalysisContainer.appendChild(therapiesIntro);
-        
-        const therapiesContainer = document.createElement('div');
-        therapiesContainer.classList.add('details-subsection');
-        oncologyAnalysisContainer.appendChild(therapiesContainer);
-        populateList(therapiesContainer, siteContent.oncologicAnalysisTherapies.list, null);
+        let htmlContent = '<div class="oncology-services">';
+        Object.values(oncologyServices).forEach(service => {
+            htmlContent += `
+                <div class="service-card glass-card">
+                    <div class="service-header">
+                        <span class="service-icon">${service.icon}</span>
+                        <h4>${service.title}</h4>
+                    </div>
+                    <div class="service-items">
+                        ${service.items.map(item => `<div class="service-item">${item}</div>`).join('')}
+                    </div>
+                </div>
+            `;
+        });
+        htmlContent += '</div>';
+        oncologyAnalysisContainer.innerHTML = htmlContent;
     }
-    const oncologicDiseasesContainer = document.querySelector('#oncology-reimagined .details-container[data-source="oncologic-diseases"]');
-    populateList(oncologicDiseasesContainer, siteContent.oncologicDiseases.list, siteContent.oncologicDiseases.title, siteContent.oncologicDiseases.intro);
     
-    // Populate #cell-therapies-section
+    const oncologicDiseasesContainer = document.querySelector('#oncology-reimagined .details-container[data-source="oncologic-diseases"]');
+    if (oncologicDiseasesContainer) {
+        let htmlContent = `
+            <div class="oncology-intro glass-card">
+                <p>${siteContent.oncologicDiseases.intro}</p>
+            </div>
+            <div class="cancer-types-grid">
+        `;
+        
+        const cancerTypes = siteContent.oncologicDiseases.list.slice(0, 8); // Show top 8
+        cancerTypes.forEach(cancer => {
+            htmlContent += `<div class="cancer-type-card">${cancer}</div>`;
+        });
+        
+        htmlContent += `
+            </div>
+            <button class="view-more-btn" onclick="toggleAllCancers()">
+                View All Cancer Types
+            </button>
+            <div id="all-cancers" style="display: none;" class="all-cancers-grid">
+                ${siteContent.oncologicDiseases.list.slice(8).map(cancer => 
+                    `<span class="cancer-pill">${cancer}</span>`
+                ).join('')}
+            </div>
+        `;
+        
+        oncologicDiseasesContainer.innerHTML = htmlContent;
+    }
+    
+    // Populate #cell-therapies with visual approach
     const tissueRegenerativeContainer = document.querySelector('#cell-therapies .details-container[data-source="tissue-regenerative-therapies"]');
-    populateList(tissueRegenerativeContainer, siteContent.tissueRegenerativeTherapies.list, siteContent.tissueRegenerativeTherapies.title);
+    if (tissueRegenerativeContainer) {
+        const regenerativeCategories = [
+            { 
+                title: 'Joint & Musculoskeletal',
+                icon: '🦴',
+                examples: ['ACL/PCL Repair', 'Rotator Cuff', 'Hip/Knee/Shoulder']
+            },
+            {
+                title: 'Aesthetic & Skin',
+                icon: '✨',
+                examples: ['Hair Regeneration', 'Anti-Aging Facials', 'Scar Revision']
+            },
+            {
+                title: 'Healing & Recovery',
+                icon: '🩹',
+                examples: ['Wound Healing', 'Burn Treatment', 'Tissue Repair']
+            }
+        ];
+        
+        let htmlContent = '<h4 class="section-subtitle">Tissue Regenerative Therapies</h4>';
+        htmlContent += '<div class="regenerative-categories">';
+        
+        regenerativeCategories.forEach(category => {
+            htmlContent += `
+                <div class="regenerative-card glass-card">
+                    <div class="regen-icon">${category.icon}</div>
+                    <h5>${category.title}</h5>
+                    <div class="regen-examples">
+                        ${category.examples.map(ex => `<span class="example-tag">${ex}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        });
+        
+        htmlContent += '</div>';
+        tissueRegenerativeContainer.innerHTML = htmlContent;
+    }
+    
     const cellularSourcesContainer = document.querySelector('#cell-therapies .details-container[data-source="cellular-sources"]');
-    populateList(cellularSourcesContainer, siteContent.cellularSources.list, siteContent.cellularSources.title);
+    if (cellularSourcesContainer) {
+        let htmlContent = '<h4 class="section-subtitle">Advanced Cellular Sources</h4>';
+        htmlContent += '<div class="cellular-sources-grid">';
+        
+        const sources = [
+            { name: 'MSCs', full: 'Mesenchymal Stem Cells', icon: '🔬' },
+            { name: 'MUSE', full: 'Multilineage Stress Enduring', icon: '⚡' },
+            { name: 'Exosomes', full: 'Cell signaling vesicles', icon: '💫' },
+            { name: 'Peptides', full: 'Bioactive molecules', icon: '🧪' },
+            { name: 'Growth Factors', full: 'Healing proteins', icon: '🌱' }
+        ];
+        
+        sources.forEach(source => {
+            htmlContent += `
+                <div class="source-card">
+                    <div class="source-icon">${source.icon}</div>
+                    <h5>${source.name}</h5>
+                    <p>${source.full}</p>
+                </div>
+            `;
+        });
+        
+        htmlContent += '</div>';
+        cellularSourcesContainer.innerHTML = htmlContent;
+    }
 
     // Populate Team Members
     const teamGrid = document.querySelector('#architects-innovation .team-grid');
@@ -539,5 +802,31 @@ function toggleBio(index) {
     } else {
         bioContainer.style.display = 'none';
         button.textContent = 'Read Full Bio';
+    }
+}
+
+function toggleAllDiseases() {
+    const allDiseasesContainer = document.getElementById('all-diseases-container');
+    if (allDiseasesContainer) {
+        if (allDiseasesContainer.style.display === 'none') {
+            allDiseasesContainer.style.display = 'block';
+            event.target.textContent = 'Close All Diseases';
+        } else {
+            allDiseasesContainer.style.display = 'none';
+            event.target.textContent = 'View All Diseases';
+        }
+    }
+}
+
+function toggleAllCancers() {
+    const allCancersContainer = document.getElementById('all-cancers');
+    if (allCancersContainer) {
+        if (allCancersContainer.style.display === 'none') {
+            allCancersContainer.style.display = 'block';
+            event.target.textContent = 'Close All Cancer Types';
+        } else {
+            allCancersContainer.style.display = 'none';
+            event.target.textContent = 'View All Cancer Types';
+        }
     }
 } 

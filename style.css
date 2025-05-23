@@ -1264,4 +1264,388 @@ button[type="submit"]:hover {
     .contact-form {
         padding: 2rem;
     }
+}
+
+/* Analysis Categories - Clean Grid Layout */
+.analysis-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.analysis-category-card {
+    padding: 2.5rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.9);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.analysis-category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.category-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    filter: grayscale(20%);
+}
+
+.analysis-category-card h4 {
+    font-size: 1.4rem;
+    color: var(--dark-greyish-green);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.category-items {
+    list-style: none;
+    padding: 0;
+}
+
+.category-items li {
+    padding: 0.5rem 0;
+    color: #666;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.category-items li:last-child {
+    border-bottom: none;
+}
+
+/* Body Systems Grid */
+.body-systems-grid {
+    margin-top: 3rem;
+}
+
+.systems-icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.system-icon-card {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background: rgba(250, 248, 245, 0.8);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.system-icon-card:hover {
+    background: rgba(196, 162, 110, 0.1);
+    transform: scale(1.05);
+}
+
+.system-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.system-icon-card p {
+    font-size: 0.85rem;
+    color: var(--dark-greyish-green);
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Disease Categories */
+.disease-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.disease-category-card {
+    padding: 2rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.disease-category-card.neurological {
+    border-color: rgba(147, 51, 234, 0.2);
+}
+
+.disease-category-card.cardiovascular {
+    border-color: rgba(236, 72, 153, 0.2);
+}
+
+.disease-category-card.metabolic {
+    border-color: rgba(251, 146, 60, 0.2);
+}
+
+.disease-category-card.genetic {
+    border-color: rgba(34, 197, 94, 0.2);
+}
+
+.disease-category-card:hover {
+    border-color: var(--gold-accent);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.category-header h4 {
+    margin: 0;
+    color: var(--dark-greyish-green);
+}
+
+.featured-diseases {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.disease-tag {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: rgba(196, 162, 110, 0.1);
+    border-radius: 16px;
+    font-size: 0.85rem;
+    color: var(--dark-greyish-green);
+}
+
+/* View All Section */
+.view-all-section {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.view-all-btn, .view-more-btn {
+    background: transparent;
+    border: 2px solid var(--gold-accent);
+    color: var(--gold-accent);
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.view-all-btn:hover, .view-more-btn:hover {
+    background: var(--gold-accent);
+    color: white;
+}
+
+.all-diseases-grid, .all-cancers-grid {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 2rem;
+    background: rgba(250, 248, 245, 0.5);
+    border-radius: 20px;
+}
+
+.disease-pill, .cancer-pill {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #666;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Longevity Grid */
+.longevity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.longevity-card {
+    padding: 2rem;
+    text-align: center;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.longevity-card:hover {
+    transform: translateY(-5px);
+}
+
+.therapy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.longevity-card h4 {
+    font-size: 1.2rem;
+    color: var(--dark-greyish-green);
+    margin-bottom: 0.5rem;
+}
+
+.longevity-card p {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Oncology Services */
+.oncology-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.service-card {
+    padding: 2.5rem;
+    border-radius: 20px;
+}
+
+.service-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.service-icon {
+    font-size: 2.5rem;
+}
+
+.service-header h4 {
+    margin: 0;
+    color: var(--dark-greyish-green);
+    font-size: 1.6rem;
+}
+
+.service-items {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.service-item {
+    padding: 0.8rem;
+    background: rgba(250, 248, 245, 0.8);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #666;
+    text-align: center;
+}
+
+/* Oncology Intro */
+.oncology-intro {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    font-style: italic;
+}
+
+/* Cancer Types Grid */
+.cancer-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.cancer-type-card {
+    padding: 1rem;
+    background: rgba(74, 93, 82, 0.08);
+    border-radius: 12px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--dark-greyish-green);
+    font-weight: 500;
+}
+
+/* Regenerative Categories */
+.regenerative-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.regenerative-card {
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.regen-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.regenerative-card h5 {
+    font-size: 1.4rem;
+    color: var(--dark-greyish-green);
+    margin-bottom: 1.5rem;
+}
+
+.regen-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.example-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(196, 162, 110, 0.15);
+    border-radius: 18px;
+    font-size: 0.85rem;
+    color: var(--dark-greyish-green);
+}
+
+/* Cellular Sources Grid */
+.cellular-sources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.source-card {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    border: 1px solid rgba(196, 162, 110, 0.2);
+    transition: all 0.3s ease;
+}
+
+.source-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold-accent);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.source-icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.source-card h5 {
+    font-size: 1.1rem;
+    color: var(--dark-greyish-green);
+    margin-bottom: 0.5rem;
+}
+
+.source-card p {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
 } 
